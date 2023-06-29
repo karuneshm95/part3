@@ -46,16 +46,16 @@ warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 # Your Streamlit code
 # ...
-
+selected_file = st.sidebar.selectbox('Select Dataset', ('CWRU_12K_3hp.parquet', 'CWRU_12K_2hp.parquet', 'CWRU_12K_1hp.parquet','CWRU_12K_0hp.parquet'))
 # Reset the warning filters after your Streamlit code
 warnings.resetwarnings()
 # Load the data
 @st.cache_data()
-def load_data():
-    data = pd.read_excel('df_vibration.xlsx')
+def load_data(selected_file):
+    data = pd.read_parquet(selected_file)
     return data
 
-data = load_data()
+data = load_data(selected_file)
 warnings.resetwarnings()
 # Sidebar - Select Features and Labels
 
