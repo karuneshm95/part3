@@ -44,13 +44,13 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import classification_report
 from sklearn.svm import SVC
-from tpot import TPOTClassifier
-import warnings
+#from tpot import TPOTClassifier
+#import warnings
 import streamlit as st
 import numpy as np
 import pandas as pd
 from sklearn.metrics import roc_auc_score
-from skopt import BayesSearchCV
+#from skopt import BayesSearchCV
 from sklearn.metrics import confusion_matrix, roc_auc_score
 import plotly.express as px
 # Suppress the warning message
