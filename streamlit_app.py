@@ -27,7 +27,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import SVC
 from sklearn.metrics import classification_report
-import ipywidgets as widgets
+#import ipywidgets as widgets
 import time
 import pandas as pd
 from sklearn.datasets import load_iris
