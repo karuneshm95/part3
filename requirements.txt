@@ -4,4 +4,6 @@ pandas==1.2.4
 scikit_learn==0.24.2
 streamlit==0.86.0
 pip==23.1.2
-sklearn==0.24.2
+scikit-learn==0.24.2
+numpy==1.21.0
+
