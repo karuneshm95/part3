@@ -52,7 +52,7 @@ import pandas as pd
 from sklearn.metrics import roc_auc_score
 #from skopt import BayesSearchCV
 from sklearn.metrics import confusion_matrix, roc_auc_score
-import plotly.express as px
+#import plotly.express as px
 # Suppress the warning message
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 
