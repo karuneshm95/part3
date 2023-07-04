@@ -6,7 +6,7 @@ selected_file = st.sidebar.selectbox('Select Dataset', ('CWRU_12K_3hp.parquet', 
 # Reset the warning filters after your Streamlit code
 
 # Load the data
-@st.cache_data()
+@st.cache
 def load_data(selected_file):
     data = pd.read_parquet(selected_file)
     return data
