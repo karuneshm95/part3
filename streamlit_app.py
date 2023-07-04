@@ -80,7 +80,7 @@ def train_and_evaluate_model(model_name=selected_classifier,feature_selection=se
     elif model_name == 'Random Forest':
         model = RandomForestClassifier()
     elif model_name == 'SVM':
-        model = SVC()
+        model = SVC(probability=True)
     elif model_name =='KNN':
         model=KNeighborsClassifier()
     elif model_name =='Decision Tree':
