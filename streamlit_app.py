@@ -12,7 +12,7 @@ def load_data(selected_file):
     return data
 
 data = load_data(selected_file)
-X_train, X_test, y_train, y_test = train_test_split(data.iloc[:,:-1], data.iloc[:,-1], test_size=0.2, random_state=42)
+
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
@@ -62,7 +62,7 @@ warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 # Sidebar - Select Features and Labels
 
-
+X_train, X_test, y_train, y_test = train_test_split(data.iloc[:,:-1], data.iloc[:,-1], test_size=0.2, random_state=42)
 
 # Split the data into train and test sets
 
