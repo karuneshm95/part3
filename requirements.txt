@@ -4,6 +4,6 @@ pandas==1.2.4
 scikit_learn==0.24.2
 streamlit==0.86.0
 pip==23.1.2
-
+plotly=2.24.1
 numpy==1.21.0
 
