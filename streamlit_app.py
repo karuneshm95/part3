@@ -403,7 +403,7 @@ def train_and_evaluate_model(model_name=selected_classifier,feature_selection=se
         
         start_time = time.time()
         
-        model.predict(pd.DataFrame(X_test_selected).sample(n=1)
+        model.predict(pd.DataFrame(X_test_selected).sample(n=1))
         
         end_time = time.time()
         test_time = end_time - start_time
