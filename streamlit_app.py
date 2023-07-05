@@ -3,7 +3,7 @@ import streamlit as st
 
 import pandas as pd
 
-#st.markdown("<h1 style='text-align: center; color: red;'>Fault Detector</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: red;'>Fault Detector</h1>", unsafe_allow_html=False)
 selected_file = st.sidebar.selectbox('Select Dataset', ('CWRU_12K_3hp.parquet', 'CWRU_12K_2hp.parquet', 'CWRU_12K_1hp.parquet','CWRU_12K_0hp.parquet'))
 # Reset the warning filters after your Streamlit code
 
@@ -310,7 +310,7 @@ def train_and_evaluate_model(model_name=selected_classifier,feature_selection=se
             model.fit(X_train_selected,y_train)
             best_random_params=model.get_params()
             start_time = time.time()
-            model.predict(X_test_selected.sample(n=1))
+            model.predict(pd.DataFrame(X_test_selected).sample(n=1))
             end_time = time.time()
             test_time_rs = end_time - start_time
             return X_train_selected,X_test_selected,model,test_time_rs,best_random_params
