@@ -3,7 +3,7 @@ import streamlit as st
 
 import pandas as pd
 
-st.markdown("<h1 style='text-align: center; color: red;'>Fault Detector</h1>", unsafe_allow_html=True)
+#st.markdown("<h1 style='text-align: center; color: red;'>Fault Detector</h1>", unsafe_allow_html=True)
 selected_file = st.sidebar.selectbox('Select Dataset', ('CWRU_12K_3hp.parquet', 'CWRU_12K_2hp.parquet', 'CWRU_12K_1hp.parquet','CWRU_12K_0hp.parquet'))
 # Reset the warning filters after your Streamlit code
 
