@@ -402,7 +402,9 @@ def train_and_evaluate_model(model_name=selected_classifier,feature_selection=se
         model.fit(X_train_selected, y_train)
         
         start_time = time.time()
-        model.predict(X_test_selected.sample(n=1))
+        random_sample = np.random.choice(X_test_selected, size=1)
+        model.predict(random_sample)
+        
         end_time = time.time()
         test_time = end_time - start_time
         best_params=model.get_params()
