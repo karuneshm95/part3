@@ -572,34 +572,14 @@ import matplotlib.pyplot as plt
 #data = pd.read_csv('existing_data.csv')  # Assuming the data is in CSV format
 
 # Calculate the correlation matrix
-corr_matrix = df_vibrationa_bAx.corr().abs()
 
-# Set the correlation threshold for removing highly correlated features
-correlation_threshold = 0.8
-
-# Find the highly correlated features
-highly_correlated_features = np.where(corr_matrix > correlation_threshold)
-
-# Get the unique pairs of highly correlated features
-correlated_pairs = set()
-for feature_a, feature_b in zip(*highly_correlated_features):
-    if feature_a != feature_b:
-        pair = (df_vibrationa_bAx.columns[feature_a], df_vibrationa_bAx.columns[feature_b])
-        correlated_pairs.add(tuple(sorted(pair)))
 
 # Print the highly correlated feature pairs
 
-for pair in correlated_pairs:
-    print(pair)
 
-# Drop one feature from each highly correlated pair
-for feature_a, feature_b in correlated_pairs:
-    if feature_a in df_vibrationa_bAx.columns:
-        df_vibrationa_bAx.drop(feature_a, axis=1, inplace=True)
-print(df_vibrationa_bAx.columns,data.columns)
+
 # Plot correlation in a scatter plot
-df_vibrationa_bAx=df_vibrationa_bAx.dropna().reset_index(drop=True)
-df_vibrationa_bAx=df_vibrationa_bAx.drop(['std_tf_skewness','std_tf_kurtosis'],axis=1)
-st.write(f"Test Dataset Accuracy:{data}{df_vibrationa_bAx}")
+
+
 accuracy_test=accuracy_score(df_vibrationa_bAx.iloc[:,-1],best_estimator.predict(df_vibrationa_bAx.iloc[:,:-1]))
 st.write(f"Test Dataset Accuracy:{accuracy_test}")
