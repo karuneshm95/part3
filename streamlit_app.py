@@ -513,7 +513,7 @@ data = []
     
         
    
-splits = np.array_split(df, 20000)
+splits = np.array_split(df.iloc[:20000,:], 1000)
 for split in splits:
         
     x=split['DE'].to_numpy()
@@ -609,7 +609,7 @@ for pair in correlated_pairs:
 for feature_a, feature_b in correlated_pairs:
     if feature_a in df_vibrationa_bAx.columns:
         df_vibrationa_bAx.drop(feature_a, axis=1, inplace=True)
-
+print(df_vibrationa_bAx.columns,data.columns)
 # Plot correlation in a scatter plot
 df_vibrationa_bAx=df_vibrationa_bAx.dropna().reset_index(drop=True)
 df_vibrationa_bAx=df_vibrationa_bAx.drop(['std_tf_skewness','std_tf_kurtosis'],axis=1)
