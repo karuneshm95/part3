@@ -68,12 +68,12 @@ X_train, X_test, y_train, y_test = train_test_split(data.iloc[:,:-1], data.iloc[
 
 # Split the data into train and test sets
 
-
-# Sidebar - Select Classifier
-selected_classifier = st.sidebar.selectbox('Select Classifier', ('Logistic Regression', 'Random Forest', 'SVM','KNN','Decision Tree'))
 selected_feature = st.sidebar.selectbox('Feature Selection', ('None', 'Chi-Squared','ANOVA_F-Valued',
              'Mutual_Information','RFE','RFECV','SFM',
             'Variance_Threshold','FDR','FPR','FWE'))
+# Sidebar - Select Classifier
+selected_classifier = st.sidebar.selectbox('Select Classifier', ('Logistic Regression', 'Random Forest', 'SVM','KNN','Decision Tree'))
+
 selected_tuning = st.sidebar.selectbox('Hyperparameter Tuning', ('None', 'Grid Search', 'Random Search','Bayesian Optimization','Genetic Algorithm'))
 def train_and_evaluate_model(model_name=selected_classifier,feature_selection=selected_feature, hyperparam_opt=selected_tuning):
     
@@ -466,3 +466,151 @@ for i in range(num_classes):
 
 # Plot the ROC curve for each class (example for one class)
 st.line_chart(pd.DataFrame({'False Positive Rate': fpr[0], 'True Positive Rate': tpr[0]}))
+import scipy.io
+file = st.sidebar.selectbox('Select Test Dataset', ('100.mat','112.mat','125.mat','138.mat'))
+mat_data = scipy.io.loadmat(file)
+if file=='100.mat':
+        data=mat_data['X100_DE_time']#healthy
+        df = pd.DataFrame(data,columns=['DE'])
+        df['Category']=0
+    if file=='112.mat':
+        data=mat_data['X112_DE_time']#inner
+        df = pd.DataFrame(data,columns=['DE'])
+        df['Category']=1
+    if file=='125.mat':
+        data=mat_data['X125_DE_time']#ball
+        df = pd.DataFrame(data,columns=['DE'])
+        df['Category']=2
+    if file=='138.mat':
+        data=mat_data['X138_DE_time']#outer
+        df = pd.DataFrame(data,columns=['DE'])
+        df['Category']=3
+import pandas as pd
+import numpy as np
+import numpy as np
+import pandas as pd
+import scipy.signal as signal
+import pywt
+import scipy.stats as stats
+from scipy.stats import skew, kurtosis
+import numpy as np
+from scipy.stats import kurtosis, skew
+from scipy.signal import welch
+import pywt
+#df=pd.read_parquet('vibration.parquet') 
+
+import pandas as pd
+
+
+# getting excel files to be merged from the Desktop 
+
+
+# read all the files with extension .xlsx i.e. excel 
+
+# Create an empty list to store the dictionaries
+data = []
+
+    
+        
+   
+splits = np.array_split(df, 20000)
+for split in splits:
+        
+    x=split['DE'].to_numpy()
+    y=split['Category'].to_numpy()
+    nperseg=min(len(x),256)
+    freq_spectrum=np.fft.fft(x)
+    freq_amplitude=np.abs(freq_spectrum)
+    frequencies_Ax,power_spectrum_Ax=welch(x)
+    freq_power_DnI_1=np.square(freq_amplitude)
+    freq_skewness_DnI_1=skew(freq_amplitude)
+    freq_kurtosis_DnI_1=kurtosis(freq_amplitude)
+    frequencies,time,spectrogram=signal.spectrogram(x,fs=48000,nperseg=nperseg)
+    tf_skewness=skew(spectrogram)
+    tf_kurtosis=kurtosis(spectrogram)
+        
+    row ={'rms_DnI_1':np.sqrt(np.mean(np.square(x.astype(float)))),
+                            'mean_DnI_1':np.mean(x.astype(float)),
+                            'median_DnI_1':np.median(x),
+                            'Kurtosis_value_DnI_1':kurtosis(x),
+                             'Skewness_DnI_1':skew(x),
+                             'min_DnI_1':np.min(x.astype(float)),
+                             'max_DnI_1':np.max(x.astype(float)),
+                             'std_DnI_1':np.std(x),
+                             'mean_freq_power_DnI_1':np.mean(freq_power_DnI_1),
+                             'freq_mean_DnI_1':np.mean(freq_amplitude),
+                             'freq_std_DnI_1':np.std(freq_amplitude),
+                             'mean_freq_skewness_DnI_1':np.mean(freq_skewness_DnI_1),
+                              'mean_freq_kurtosis_DnI_1':np.mean(freq_kurtosis_DnI_1),
+                              'tf_mean':np.mean(spectrogram),
+                              'tf_std':np.std(spectrogram),
+                              'tf_min':np.min(spectrogram),
+                              'tf_max':np.max(spectrogram),
+                              'tf_median':np.median(spectrogram),
+                              'tf_sum':np.sum(spectrogram),
+                               
+                             'mean_tf_skewness':np.mean(tf_skewness),
+                             
+                             'max_tf_skewness':np.median(tf_skewness),
+                              'min_tf_skewness':np.min(tf_skewness),
+                              'std_tf_skewness':np.std(tf_skewness),
+                               'sum_tf_skewness':np.sum(tf_skewness),
+              
+                             'mean_tf_kurtosis':np.mean(tf_kurtosis),
+                             'median_tf_kurtosis':np.median(tf_kurtosis),
+                             'max_tf_kurtosis':np.max(tf_kurtosis),
+                              'min_tf_kurtosis':np.min(tf_kurtosis),
+                              'std_tf_kurtosis':np.std(tf_kurtosis),
+                              'sum_tf_kurtosis':np.sum(tf_kurtosis),
+                             'max_pf_DnI_1':frequencies_Ax[np.argmax(power_spectrum_Ax)],
+                              'total_power_DnI_1':np.sum(power_spectrum_Ax),
+                             'mean_power_DnI_1':np.mean(power_spectrum_Ax),
+                              'max_power_DnI_1':np.max(power_spectrum_Ax),
+                              'std_power_DnI_1':np.std(power_spectrum_Ax),
+                              
+                            
+                             
+                             
+                            'vibration_Category':int(np.mean(split['Category']))}
+    data.append(row)
+
+    
+# Create a DataFrame from the list of dictionaries
+df_vibrationa_bAx = pd.DataFrame(data)
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Load the data from the existing file
+#data = pd.read_csv('existing_data.csv')  # Assuming the data is in CSV format
+
+# Calculate the correlation matrix
+corr_matrix = df_vibrationa_bAx.corr().abs()
+
+# Set the correlation threshold for removing highly correlated features
+correlation_threshold = 0.8
+
+# Find the highly correlated features
+highly_correlated_features = np.where(corr_matrix > correlation_threshold)
+
+# Get the unique pairs of highly correlated features
+correlated_pairs = set()
+for feature_a, feature_b in zip(*highly_correlated_features):
+    if feature_a != feature_b:
+        pair = (df_vibrationa_bAx.columns[feature_a], df_vibrationa_bAx.columns[feature_b])
+        correlated_pairs.add(tuple(sorted(pair)))
+
+# Print the highly correlated feature pairs
+
+for pair in correlated_pairs:
+    print(pair)
+
+# Drop one feature from each highly correlated pair
+for feature_a, feature_b in correlated_pairs:
+    if feature_a in df_vibrationa_bAx.columns:
+        df_vibrationa_bAx.drop(feature_a, axis=1, inplace=True)
+
+# Plot correlation in a scatter plot
+df_vibrationa_bAx=df_vibrationa_bAx.dropna().reset_index(drop=True)
+accuracy_test=accuracy_score(df_vibrationa_bAx.iloc[:,-1],best_estimator.predict(df_vibrationa_bAx.iloc[:,:-1]))
+st.write(f"Test Dataset Accuracy:{accuracy_test}")
