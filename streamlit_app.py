@@ -472,6 +472,7 @@ mat_data = scipy.io.loadmat(file)
 if file=='100.mat':
         data=mat_data['X100_DE_time']#healthy
         df = pd.DataFrame(data,columns=['DE'])
+        df=df.iloc[:2000,:]
         df['Category']=0
 if file=='112.mat':
         data=mat_data['X112_DE_time']#inner
