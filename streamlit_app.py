@@ -612,5 +612,6 @@ for feature_a, feature_b in correlated_pairs:
 
 # Plot correlation in a scatter plot
 df_vibrationa_bAx=df_vibrationa_bAx.dropna().reset_index(drop=True)
+df_vibrationa_bAx=df_vibrationa_bAx.drop(['std_tf_skewness','std_tf_kurtosis'],axis=1)
 accuracy_test=accuracy_score(df_vibrationa_bAx.iloc[:,-1],best_estimator.predict(df_vibrationa_bAx.iloc[:,:-1]))
 st.write(f"Test Dataset Accuracy:{accuracy_test}")
