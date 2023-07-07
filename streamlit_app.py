@@ -222,7 +222,7 @@ def train_and_evaluate_model(model_name=selected_classifier,feature_selection=se
             model.fit(X_train_selected,y_train)
             best_grid_params=model.get_params()
             start_time = time.time()
-            model.predict(X_test_selected.sample(n=1))
+            model.predict(pd.DataFrame(X_test_selected).sample(n=1))
             end_time = time.time()
             test_time_gsa = end_time - start_time
             return X_train_selected,X_test_selected,model,test_time_gsa,best_grid_params
