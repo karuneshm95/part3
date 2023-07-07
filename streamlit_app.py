@@ -473,15 +473,15 @@ if file=='100.mat':
         data=mat_data['X100_DE_time']#healthy
         df = pd.DataFrame(data,columns=['DE'])
         df['Category']=0
-    if file=='112.mat':
+if file=='112.mat':
         data=mat_data['X112_DE_time']#inner
         df = pd.DataFrame(data,columns=['DE'])
         df['Category']=1
-    if file=='125.mat':
+if file=='125.mat':
         data=mat_data['X125_DE_time']#ball
         df = pd.DataFrame(data,columns=['DE'])
         df['Category']=2
-    if file=='138.mat':
+if file=='138.mat':
         data=mat_data['X138_DE_time']#outer
         df = pd.DataFrame(data,columns=['DE'])
         df['Category']=3
