@@ -514,7 +514,7 @@ data = []
     
         
    
-splits = np.array_split(df.iloc[:20000,:], 1000)
+splits = np.array_split(df.iloc[:20000,:], 100)
 for split in splits:
         
     x=split['DE'].to_numpy()
@@ -530,44 +530,30 @@ for split in splits:
     tf_skewness=skew(spectrogram)
     tf_kurtosis=kurtosis(spectrogram)
         
-    row ={'rms_DnI_1':np.sqrt(np.mean(np.square(x.astype(float)))),
-                            'mean_DnI_1':np.mean(x.astype(float)),
+    row ={
                             'median_DnI_1':np.median(x),
                             'Kurtosis_value_DnI_1':kurtosis(x),
                              'Skewness_DnI_1':skew(x),
-                             'min_DnI_1':np.min(x.astype(float)),
-                             'max_DnI_1':np.max(x.astype(float)),
-                             'std_DnI_1':np.std(x),
-                             'mean_freq_power_DnI_1':np.mean(freq_power_DnI_1),
-                             'freq_mean_DnI_1':np.mean(freq_amplitude),
-                             'freq_std_DnI_1':np.std(freq_amplitude),
-                             'mean_freq_skewness_DnI_1':np.mean(freq_skewness_DnI_1),
-                              'mean_freq_kurtosis_DnI_1':np.mean(freq_kurtosis_DnI_1),
-                              'tf_mean':np.mean(spectrogram),
-                              'tf_std':np.std(spectrogram),
-                              'tf_min':np.min(spectrogram),
-                              'tf_max':np.max(spectrogram),
-                              'tf_median':np.median(spectrogram),
-                              'tf_sum':np.sum(spectrogram),
-                               
-                             'mean_tf_skewness':np.mean(tf_skewness),
                              
-                             'max_tf_skewness':np.median(tf_skewness),
-                              'min_tf_skewness':np.min(tf_skewness),
+                             
+                             'mean_freq_skewness_DnI_1':np.mean(freq_skewness_DnI_1),
+                             
+                              
+                              'tf_min':np.min(spectrogram),
+                              
+                               
+                            
+                             
+                             
                               'std_tf_skewness':np.std(tf_skewness),
                                'sum_tf_skewness':np.sum(tf_skewness),
               
-                             'mean_tf_kurtosis':np.mean(tf_kurtosis),
-                             'median_tf_kurtosis':np.median(tf_kurtosis),
-                             'max_tf_kurtosis':np.max(tf_kurtosis),
-                              'min_tf_kurtosis':np.min(tf_kurtosis),
+                            
                               'std_tf_kurtosis':np.std(tf_kurtosis),
-                              'sum_tf_kurtosis':np.sum(tf_kurtosis),
+                             
                              'max_pf_DnI_1':frequencies_Ax[np.argmax(power_spectrum_Ax)],
                               'total_power_DnI_1':np.sum(power_spectrum_Ax),
-                             'mean_power_DnI_1':np.mean(power_spectrum_Ax),
-                              'max_power_DnI_1':np.max(power_spectrum_Ax),
-                              'std_power_DnI_1':np.std(power_spectrum_Ax),
+                             
                               
                             
                              
