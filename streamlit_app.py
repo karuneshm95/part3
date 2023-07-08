@@ -581,6 +581,6 @@ import matplotlib.pyplot as plt
 # Plot correlation in a scatter plot
 
 pred=best_estimator.predict(df_vibrationa_bAx.iloc[:,:-1])
-st.write(f"Test Dataset Accuracy:{pred}")
+st.write(f"Test Prediction:{pred}")
 accuracy_test=accuracy_score(df_vibrationa_bAx.iloc[:,-1],best_estimator.predict(df_vibrationa_bAx.iloc[:,:-1]))
 st.write(f"Test Dataset Accuracy:{accuracy_test}")
