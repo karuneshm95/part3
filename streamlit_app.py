@@ -530,7 +530,7 @@ for split in splits:
     tf_skewness=skew(spectrogram)
     tf_kurtosis=kurtosis(spectrogram)
         
-    row ={'mean_DnI_1':np.mean(x.astype(float)),
+    row ={
                             'median_DnI_1':np.median(x),
                             'Kurtosis_value_DnI_1':kurtosis(x),
                              'Skewness_DnI_1':skew(x),
