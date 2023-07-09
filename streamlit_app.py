@@ -94,7 +94,7 @@ def train_and_evaluate_model(model_name=selected_classifier,feature_selection=se
         X_test_selected = selector.transform(X_test)
     elif feature_selection == 'Chi-Squared':
         # Perform feature selection using SelectKBest
-        selector = SelectKBest(chi2, k=20)
+        selector = SelectKBest(chi2, k=10)
         X_train_selected = selector.fit_transform(X_train, y_train)
         X_test_selected = selector.transform(X_test)
     elif feature_selection == 'Mutual_Information':
